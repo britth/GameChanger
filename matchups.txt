@@ -1,0 +1,11 @@
+#Dictionary with matchup (key) and [name, nickname, abbreviation] (values)
+#Only using abbreviation to begin
+#Gathered with a CURL command using the ESPN Teams API
+#Manually formatted after filtered into the matchups in our scope timespan
+
+{WichitaStVKentucky: [WICH, UK], 	#Shockers, Wichita State, Wildcats, Kentucky
+IowaStVUNC: [ISU, UNC],			#Cyclones, Iowa State, Tar Heels, North Carolina
+TennesseeVMercer: [TENN, MER],		#Volunteers, Tennessee, Bears, Mercer
+UCLAVStephenFAustin: [UCLA, SFA],	#Bruins, Lumberjacks, SF Austin
+CreightonVBaylor: [CREI, BAY]		#Bluejays, Creighton, Bears, Baylor
+}
