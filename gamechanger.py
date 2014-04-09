@@ -28,7 +28,7 @@ def GameChanger(tournamentTweets):
   ###Currently testing, so timestamp is simply first timestamp of input file
   ###Eventually, timestamp will be current time (since stream would be real-time)
 
-  timestamp = unix_time(tweets[1][:tweets[1].find(',')])
+  timestamp = unix_time(tweets[0][:tweets[0].find(',')])
 
   searchingFor = {}
   current_sched = ''
@@ -50,7 +50,7 @@ def GameChanger(tournamentTweets):
 
   schedule = {'WichitaStVKentucky': '03/23/2014 14:45:00',
 		'IowaStVUNC': '03/23/2014 17:15:00',
-		'TennesseeVMercer': '03/23/2014 18:01:00',   #ACTUAL TIME IS 18:10:00
+		'TennesseeVMercer': '03/23/2014 18:01:00',   #ACTUAL TIME IS 18:10:00, just changed for testing
 		'UCLAVStephenFAustin': '03/23/2014 19:10:00',
 		'CreightonVBaylor': '03/23/2014 19:45:00'
 		}
