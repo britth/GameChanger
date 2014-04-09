@@ -3,6 +3,7 @@ import datetime
 
 
 ###Use to format timestamps to unix format
+###All times are currently provided in EST
 def unix_time(timestamp):
   timeFormat = '%m/%d/%Y %H:%M:%S'
   unixTime = time.mktime(datetime.datetime.strptime(timestamp, timeFormat).timetuple())
@@ -27,6 +28,7 @@ def GameChanger(tournamentTweets):
 
   ###Currently testing, so timestamp is simply first timestamp of input file
   ###Eventually, timestamp will be current time (since stream would be real-time)
+  ###All times are currently provided in EST
 
   timestamp = unix_time(tweets[0][:tweets[0].find(',')])
 
