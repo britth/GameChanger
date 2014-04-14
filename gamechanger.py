@@ -160,4 +160,4 @@ def GameChanger(tournamentTweets):
 
 
 #Currently, just using a hand created basic text file to test, not the real data set
-GameChanger('NCAA23Mar2014Tweets.txt')
+GameChanger('data/NCAA23Mar2014Tweets.txt')
