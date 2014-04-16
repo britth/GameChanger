@@ -34,12 +34,11 @@ def GameChanger(tournamentTweets):
   ###Eventually, timestamp will be current time (since stream would be real-time)
   ###For timestamps from dataset, have to subtract 14400 to convert to daylight savings EST (natively in GMT)
   timestamp = unix_time(tweets[0][:tweets[0].find(',')])-14400
-  print timestamp
-  searchingFor = {}
+  searchingFor = {}    #contains search terms matching each game, updated whenever schedule changes
   current_sched = ''
 
-  tweetRates = {}
-  tweetsPerInterval = {}
+  tweetRates = {}        #accumulates totals for every matchup during the entire period
+  tweetsPerInterval = {}  #adds up mentions of each matchup that occurs during each 30 sec period
 
   ###Matchups, schedule, tv, and searchTerms currently hard coded as dictionaries
   ###Eventually read in from API or external files
@@ -91,14 +90,11 @@ def GameChanger(tournamentTweets):
 
 
   ###check time to ensure matchup is occurring (loop every 30 secs)
-  
   while timestamp < unix_time(tweets[len(tweets)-1][:tweets[len(tweets)-1].find(',')])-14400:	#i.e., reached end of file #was +30
     searchingFor = search_terms(searchingFor, timestamp, searchTerms, schedule, end)
     current_sched = print_sched(searchingFor, timestamp, matchups, schedule, tv, current_sched)
     tweetsPerInterval, tweetRates, tweets = find_current_totals(tweets, tweetRates, searchingFor, timestamp)
-    #print len(tweets)
-       
-    #print tweetsPerInterval.values()
+    
     timestamp = timestamp + 30
     greatest = 0
     for value in tweetsPerInterval.values():
@@ -166,6 +162,6 @@ def find_current_totals(tweets, tweetRates, searchingFor, timestamp):
 
 #Input is a data set of tweets containing 'marchmadness' or 'ncaa' from evening of March 23
 #timestamps are in GMT
-#GameChanger('NCAA23Mar2014Tweets.txt')
+#GameChanger('data/NCAA23Mar2014Tweets.txt')
 GameChanger(test.main_menu())
 
