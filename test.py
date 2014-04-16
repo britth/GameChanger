@@ -1,16 +1,25 @@
 def main_menu():
     print "Welcome to GameChanger"
-    user=input("What sports would you want to follow? Type A for Men's basketball:" )
-    if user==A:
-       print ( user+', ' +"You are a basketball fan. Great!")
-    else:
-       print "Whoops! What you just entered is an invalid input.  Could you reenter the right input: A?"
-    user=input ("What tournament do you want to follow? Type A for 2014 NCAA Men's Tournament:" )
-    if user==A:
-       print ( user+', ' "You are about to explore which games are more exciting!")
-    else:
-       print "Whoops! What you just entered is an invalid input.  Could you reenter a right input: A?"
-
+    file = 'data/NCAA23Mar2014.txt'
+    sport = ''
+    tournament = ''
+    while sport not in ('A', 'a'):
+        user = raw_input("What sports would you want to follow? Type A for Men's basketball: " )
+        print user
+        if user in ('A', 'a'):
+           sport = user
+           print ( user+', ' +"You are a basketball fan. Great!")
+        else:
+           print "Whoops! What you just entered is an invalid input.  Could you reenter the right input: A?"
+    while tournament not in ('A', 'a'):
+        user = raw_input ("What tournament do you want to follow? Type A for 2014 NCAA Men's Tournament:" )
+        if user in ('A', 'a'):  
+           tournament = user
+           print (user+', ' "You are about to explore which games are more exciting!")
+        else:
+           print "Whoops! What you just entered is an invalid input.  Could you reenter a right input: A?"
+    if tournament in ('A', 'a'):
+        return file
 
 def school_tweet_rate(school,tweetnumber, time, timestamp):  #time in number of minutes, this function calculates tweet rate of each school every minute  #time=part of data, taimstamp=specific time   
      totaltweets=0                                              #timestamp=entered time by a user
