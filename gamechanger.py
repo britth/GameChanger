@@ -1,6 +1,6 @@
 import time
 import datetime
-import test
+#import test
 
 ###Use to format timestamps to unix format
 def unix_time(timestamp):
@@ -20,6 +20,31 @@ def get_sched(searchingFor, timestamp, matchups, schedule, tv):
   for key in searchingFor:
     output = output + '\n'+matchups[key] + '\t==\tNetwork: '+ tv[key] + '\t==\tScheduled Start: ' + schedule[key]
   return output.strip()
+
+###Main menu function, asking for user input on sport/tournament to follow
+###Moved from test.py
+def main_menu():
+    print "Welcome to GameChanger"
+    file = 'data/NCAA23Mar2014.txt'
+    sport = ''
+    tournament = ''
+    while sport not in ('A', 'a'):
+        user = raw_input("What sports would you want to follow? Type A for Men's basketball: " )
+        print user
+        if user in ('A', 'a'):
+           sport = user
+           print ( user+', ' +"You are a basketball fan. Great!")
+        else:
+           print "Whoops! What you just entered is an invalid input. Could you reenter the right input: A?"
+    while tournament not in ('A', 'a'):
+        user = raw_input ("What tournament do you want to follow? Type A for 2014 NCAA Men's Tournament:" )
+        if user in ('A', 'a'):
+           tournament = user
+           print (user+', ' "You are about to explore which games are more exciting!")
+        else:
+           print "Whoops! What you just entered is an invalid input. Could you reenter a right input: A?"
+    if tournament in ('A', 'a'):
+        return file
 
 def GameChanger(tournamentTweets):
 
@@ -163,5 +188,5 @@ def find_current_totals(tweets, tweetRates, searchingFor, timestamp):
 #Input is a data set of tweets containing 'marchmadness' or 'ncaa' from evening of March 23
 #timestamps are in GMT
 #GameChanger('data/NCAA23Mar2014Tweets.txt')
-GameChanger(test.main_menu())
+GameChanger(main_menu())
 
