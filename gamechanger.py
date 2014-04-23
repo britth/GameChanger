@@ -1,5 +1,7 @@
 import time
 import datetime
+#import signal
+#import sys
 #import test
 
 ###Use to format timestamps to unix format
@@ -113,24 +115,28 @@ def GameChanger(tournamentTweets):
 		'CreightonVBaylor': ['CREI', 'BAY', 'Bluejays', 'Creighton', 'Bears', 'Baylor']
 		}
 
-
+  try:
   ###check time to ensure matchup is occurring (loop every 30 secs)
-  while timestamp < unix_time(tweets[len(tweets)-1][:tweets[len(tweets)-1].find(',')])-14400:	#i.e., reached end of file #was +30
-    searchingFor = search_terms(searchingFor, timestamp, searchTerms, schedule, end)
-    current_sched = print_sched(searchingFor, timestamp, matchups, schedule, tv, current_sched)
-    tweetsPerInterval, tweetRates, tweets = find_current_totals(tweets, tweetRates, searchingFor, timestamp)
+    while timestamp < unix_time(tweets[len(tweets)-1][:tweets[len(tweets)-1].find(',')])-14400:	#i.e., reached end of file #was +30
+      searchingFor = search_terms(searchingFor, timestamp, searchTerms, schedule, end)
+      current_sched = print_sched(searchingFor, timestamp, matchups, schedule, tv, current_sched)
+      tweetsPerInterval, tweetRates, tweets = find_current_totals(tweets, tweetRates, searchingFor, timestamp)
     
-    timestamp = timestamp + 30
-    greatest = 0
-    for value in tweetsPerInterval.values():
-      if value > greatest:
-        greatest = value
-    if greatest > 0:
-      print '\nActivity for time period: ' + str (est_time(timestamp-30)) + ' to ' + str(est_time(timestamp-1))
-      greatestKey = tweetsPerInterval.keys()[tweetsPerInterval.values().index(greatest)]
-      print "-----------------------------------------------------------\nThe most tweeted about game is: " + matchups[greatestKey] +" (" +str(greatest) + " tweets)\nWatch it live on "+ tv[greatestKey]+"!\n-----------------------------------------------------------"
-    tweetsPerInterval.clear()
-  print tweetRates
+      timestamp = timestamp + 30
+      greatest = 0
+      for value in tweetsPerInterval.values():
+        if value > greatest:
+          greatest = value
+      if greatest > 0:
+        print '\nActivity for time period: ' + str (est_time(timestamp-30)) + ' to ' + str(est_time(timestamp-1))
+        greatestKey = tweetsPerInterval.keys()[tweetsPerInterval.values().index(greatest)]
+        print "-----------------------------------------------------------\nThe most tweeted about game is: " + matchups[greatestKey] +" (" +str(greatest) + " tweets)\nWatch it live on "+ tv[greatestKey]+"!\n-----------------------------------------------------------"
+      tweetsPerInterval.clear()
+    print tweetRates
+  except KeyboardInterrupt:
+    print "Thanks for using GameChanger!"
+    #sys.exit(0)
+    pass
 
 
 #find current search terms
