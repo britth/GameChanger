@@ -37,7 +37,7 @@ school_tweet_rate = school_tweet_rate(timestamp)
 def ave_tweet_rate_total(timestamp):  #updating every minute, requires the given time in               
     
     dataset_1=[]
-    with open('/Users/Sunhwa/Desktop/testing/totalPerInterval.txt', 'r') as f:
+    with open('/data/totalPerInterval.txt', 'r') as f:
         for aline in f:
             data=aline.split(" ")
             dataset_1.append(data)
@@ -77,30 +77,14 @@ def compare_tweet_rate (school_tweet_rate, ave_tweet_rate_total):# works for bot
 
 print compare_tweet_rate(school_tweet_rate, ave_tweet_rate_total)
 
-def school_tweet_volume(school):
-    
-    dataset = []
-    with open('/Users/Sunhwa/Desktop/testing/graphData.txt', 'r') as f:
-        for aline in f:
-            data = aline.split(" ")
-            dataset.append(data)
-    
-    outfile=open('/Users/Sunhwa/Desktop/school_tweet_volume.txt', 'w')
-    for i in range (0, len(dataset)):
-         if school == dataset[i][0]:
-            time = dataset[i][1]
-            tweet = dataset[i][2]
-            string_to_write = school + " "+ str(time) + " " + str(tweet)# modify,, data structure which enables to show muti graphs
-            outfile.write(string_to_write)
-    outfile.close()
-
-print school_tweet_volume("Iowa$Unc")
-
 import numpy as np
 import pylab as pl
 
-infile=open('/Users/Sunhwa/Desktop/graphData.txt', 'r')
-outfile=open('/Users/Sunhwa/Desktop/dataset_2.txt', 'w')
+save_path = raw_input("Enter a save path to be able run the graphing: for instance '/Users/Desktop/yourname'")
+
+infile=open('/data/graphData.txt', 'r')
+outfile=open(save_path + '/dataset_2.txt', 'w')
+#outfile=open('/Users/Sunhwa/Desktop/dataset_2.txt', 'w')
 aline=infile.readline()
 
 
