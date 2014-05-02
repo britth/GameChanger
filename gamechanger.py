@@ -45,8 +45,17 @@ def main_menu():
            print (user+', ' "You are about to explore which games are more exciting!")
         else:
            print "Whoops! What you just entered is an invalid input. Could you reenter a right input: A?"
-    if tournament in ('A', 'a'):
-        return file
+    while mode not in ('A', 'a', 'B', 'b'):
+        user = raw_input("What do you want to do? Type A to view updates in real time. Type B to view a graph of tweet volume for a particular game.")
+        if user in ('A', 'a'):
+            if tournament in ('A', 'a'):
+                return file
+        elif user in ('B', 'b'):
+            averageTweetRate()
+        else:
+           print "Whoops! What you just entered is an invalid input. Could you reenter a right input: A?"        
+    #if tournament in ('A', 'a'):
+     #   return file
 
 def GameChanger(tournamentTweets):
 
