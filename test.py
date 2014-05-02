@@ -21,22 +21,17 @@ def main_menu():
     if tournament in ('A', 'a'):
         return file
 
-def school_tweet_rate(school,tweetnumber, time, timestamp):  #time in number of minutes, this function calculates tweet rate of each school every minute  #time=part of data, taimstamp=specific time   
-     totaltweets=0                                              #timestamp=entered time by a user
-     for i in range(0,len(school)): 
-        if time ==timestamp:
-        totaltweets=totaltweets+tweetnmber
-        averagetweet=float(tweetnumber[i][positionof tweetnumber])/float(2*time)#time in minutes
+def school_tweet_rate(school,tweetnumber, time):  #time in number of minutes, this function calculates tweet rate of each school every minute  #time=part of data, taimstamp=specific time   
+                                               #timestamp=entered time by a user
+    for i in range(0,len(school)): 
+         averagetweet=float(tweetnumber[i])/float(2*time)#time in minutes, [i]=position of tweetnumber
     return averagetweet
 #print '%.2f'%ave_tweet_rate()
 
-
-def ave_tweet_rate_total(school,totaltweets,time,timestamp):  #updating every minute, requires the given time in               
+def ave_tweet_rate_total(school,totaltweets,time):  #updating every minute, requires the given time in               
                                                                #minutes for all school
     for i in range(0,len(school)):
-        if time ==timestamp:
-        totaltweets=totaltweets+tweetnmber
-        averagetweetT=float(totaltweets[i][position of totaltweets]])/float(2*time)# this across every school  function calculates# average    tweet rate for total 
+         averagetweetT=float(totaltweets[i][position of totaltweets]])/float(2*time)# this across every school  function calculates# average    tweet rate for total 
 	return averagetweetT
                                                                                                 
 def compare_tweet_rate (school_tweet_rate, ave_tweet_rate_total):# works for both whole day vs. a given time
