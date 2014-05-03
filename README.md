@@ -18,7 +18,7 @@ While still in beta form, a GameChanger demo is live, allowing you to explore te
   
 + Clone the repository: `git clone https://github.com/britth/GameChanger.git`
 
-+ Open a terminal and issue the following command: `python gamechanger.py`
++ Open a terminal, navigate to the GameChanger directory, `cd GameChanger`, and issue the following command: `python gamechanger.py`
 
 + Follow the prompts in your terminal to explore tournament action!
 
