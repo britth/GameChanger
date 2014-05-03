@@ -37,7 +37,7 @@ school_tweet_rate = school_tweet_rate(timestamp)
 def ave_tweet_rate_total(timestamp):  # this function calculates average tweet rate for all games for every minute for the same time frame as above.           
     
     dataset_1=[]
-    with open('/Users/Sunhwa/Desktop/testing/totalPerInterval.txt', 'r') as f:
+    with open('/data/totalPerInterval.txt', 'r') as f:
         for aline in f:
             data=aline.split(" ")
             dataset_1.append(data)
@@ -78,12 +78,17 @@ def compare_tweet_rate (school_tweet_rate, ave_tweet_rate_total):# This function
 print compare_tweet_rate(school_tweet_rate, ave_tweet_rate_total)
 
 
+
 # codes below are for graphing tweet volume for each game to see gamechanging moments.
+
 import numpy as np
 import pylab as pl
 
-infile=open('/Users/Sunhwa/Desktop/graphData.txt', 'r')
-outfile=open('/Users/Sunhwa/Desktop/dataset_2.txt', 'w')
+save_path = raw_input("Enter a save path to be able run the graphing: for instance '/Users/Desktop/yourname'")
+
+infile=open('/data/graphData.txt', 'r')
+outfile=open(save_path + '/dataset_2.txt', 'w')
+#outfile=open('/Users/Sunhwa/Desktop/dataset_2.txt', 'w')
 aline=infile.readline()
 
 
