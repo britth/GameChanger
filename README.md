@@ -11,7 +11,7 @@ While still in beta form, a GameChanger demo is live, allowing you to explore te
 
 + Ensure that the following are installed on your system (both needed if you want to run the graphing mode):
 
-  * [Canopy](https://www.enthought.com/downloads/)
+  * [Canopy](https://www.enthought.com/downloads/) (compatible with Python v. 2.7)
 
 
   * [Git Bash](http://git-scm.com/downloads)
