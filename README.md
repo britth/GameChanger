@@ -7,7 +7,7 @@ Currently, GameChanger is being developed as a small demo program, focused on a 
 
 ##Instructions
 
-While still in beta form, a GameChanger demo is live, allowing you to explore text and graph based updates about the 2014 NCAA Men's Tournament. Follow the instructions below to begin using our most stable code!
+While still in beta form, a GameChanger demo is live, allowing you to explore text and graph based updates about the 2014 NCAA Men's Tournament. Follow the instructions below to begin using our latest code!
 
 + Ensure that the following are installed on your system:
 
