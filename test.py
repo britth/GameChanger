@@ -1,6 +1,6 @@
 def main_menu():
     print "Welcome to GameChanger"
-    file = 'data/NCAA23Mar2014.txt'
+    file = 'data/NCAA23Mar2014Tweets.txt'
     sport = ''
     tournament = ''
     while sport not in ('A', 'a'):
