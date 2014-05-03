@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 timestamp = 1395616822 #1395609292 # 1395616822#1395609952 #1395608362.0 #get the time when user kick in(talk to Brittany)
 
-def school_tweet_rate(timestamp):  #time in number of minutes, this function calculates tweet rate of each school every minute  #time=part of data, taimstamp=specific time   
-                                               #timestamp=entered time by a user/no timestamp
+def school_tweet_rate(timestamp):  # this function calculates tweet rate of a particular game every minute the timeframe from the begining to timestamp; taimstamp represents user -in check-in time  
+                                           
                                                
     dataset = []
     with open('/data/graphData.txt', 'r') as f:
@@ -34,7 +34,7 @@ def school_tweet_rate(timestamp):  #time in number of minutes, this function cal
                 
 school_tweet_rate = school_tweet_rate(timestamp)
 
-def ave_tweet_rate_total(timestamp):  #updating every minute, requires the given time in               
+def ave_tweet_rate_total(timestamp):  # this function calculates average tweet rate for all games for every minute for the same time frame as above.           
     
     dataset_1=[]
     with open('/Users/Sunhwa/Desktop/testing/totalPerInterval.txt', 'r') as f:
@@ -68,7 +68,7 @@ def ave_tweet_rate_total(timestamp):  #updating every minute, requires the given
 ave_tweet_rate_total = ave_tweet_rate_total(timestamp)
 
 
-def compare_tweet_rate (school_tweet_rate, ave_tweet_rate_total):# works for both whole day v. a given time
+def compare_tweet_rate (school_tweet_rate, ave_tweet_rate_total):# This function compares average tweet rate for a particular school to that for all games.
      # for a particular school
     if school_tweet_rate > ave_tweet_rate_total:
         print "Tweet rate for this school is above average tweet rate for all school. So this game is worth watching."
@@ -77,25 +77,8 @@ def compare_tweet_rate (school_tweet_rate, ave_tweet_rate_total):# works for bot
 
 print compare_tweet_rate(school_tweet_rate, ave_tweet_rate_total)
 
-def school_tweet_volume(school):
-    
-    dataset = []
-    with open('/Users/Sunhwa/Desktop/testing/graphData.txt', 'r') as f:
-        for aline in f:
-            data = aline.split(" ")
-            dataset.append(data)
-    
-    outfile=open('/Users/Sunhwa/Desktop/school_tweet_volume.txt', 'w')
-    for i in range (0, len(dataset)):
-         if school == dataset[i][0]:
-            time = dataset[i][1]
-            tweet = dataset[i][2]
-            string_to_write = school + " "+ str(time) + " " + str(tweet)# modify,, data structure which enables to show muti graphs
-            outfile.write(string_to_write)
-    outfile.close()
 
-print school_tweet_volume("Iowa$Unc")
-
+# codes below are for graphing tweet volume for each game to see gamechanging moments.
 import numpy as np
 import pylab as pl
 
