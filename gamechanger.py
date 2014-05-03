@@ -60,7 +60,7 @@ def main_menu():
       if tournament in ('A', 'a'):
         return file
     elif user in ('B', 'b'):
-      graph_avg()
+      import graph_avg
     else:
       print "Whoops! What you just entered is an invalid input."        
 

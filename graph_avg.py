@@ -5,7 +5,7 @@ def school_tweet_rate(timestamp):  # this function calculates tweet rate of a pa
                                            
                                                
     dataset = []
-    with open('/data/graphData.txt', 'r') as f:
+    with open('data/graphData.txt', 'r') as f:
         for aline in f:
             data = aline.split(" ")
             dataset.append(data)
@@ -37,7 +37,7 @@ school_tweet_rate = school_tweet_rate(timestamp)
 def ave_tweet_rate_total(timestamp):  # this function calculates average tweet rate for all games for every minute for the same time frame as above.           
     
     dataset_1=[]
-    with open('/data/totalPerInterval.txt', 'r') as f:
+    with open('data/totalPerInterval.txt', 'r') as f:
         for aline in f:
             data=aline.split(" ")
             dataset_1.append(data)
@@ -86,7 +86,7 @@ import pylab as pl
 
 save_path = raw_input("Enter a save path to be able run the graphing: for instance '/Users/Desktop/yourname'")
 
-infile=open('/data/graphData.txt', 'r')
+infile=open('data/graphData.txt', 'r')
 outfile=open(save_path + '/dataset_2.txt', 'w')
 #outfile=open('/Users/Sunhwa/Desktop/dataset_2.txt', 'w')
 aline=infile.readline()
