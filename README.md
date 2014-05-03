@@ -9,14 +9,13 @@ Currently, GameChanger is being developed as a small demo program, focused on a 
 
 While still in beta form, a GameChanger demo is live, allowing you to explore text and graph based updates about the 2014 NCAA Men's Tournament. Follow the instructions below to begin using our latest code!
 
-+ Ensure that the following are installed on your system:
++ Ensure that the following are installed on your system (both needed if you want to run the graphing mode):
 
   * [Canopy](https://www.enthought.com/downloads/)
 
 
   * [Git Bash](http://git-scm.com/downloads)
-
-
+  
 + Clone the repository: `git clone https://github.com/britth/GameChanger.git`
 
 + Open a terminal and issue the following command: `python gamechanger.py`
