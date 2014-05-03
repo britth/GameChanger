@@ -24,4 +24,4 @@ While still in beta form, a GameChanger demo is live, allowing you to explore te
 
 + To terminate the program, press CTRL-C on your keyboard
 
-+ If you want to explore an experimental interface in development for text updates, issue the following command: `python gamechangerCurses.py`
++ If you want to explore an experimental interface in development for text updates, issue the following command: `python gamechangerCurses.py` (& quit by closing your terminal window)
