@@ -9,7 +9,7 @@ Currently, GameChanger is being developed as a small demo program, focused on a 
 
 While still in beta form, a GameChanger demo is live, allowing you to explore text and graph based updates about the 2014 NCAA Men's Tournament. Follow the instructions below to begin using our most stable code!
 
-+ Ensure that the following are installed on your system:
+###Ensure that the following are installed on your system:
 
 ```
 [Canopy](https://www.enthought.com/downloads/)
@@ -19,27 +19,24 @@ While still in beta form, a GameChanger demo is live, allowing you to explore te
 [Git Bash](http://git-scm.com/downloads)
 ```
 
-+ Clone the repository:
+###Clone the repository:
 
 ```
 git clone https://github.com/britth/GameChanger.git
 ```
 
-+ Open a terminal and issue the following command:
+###Open a terminal and issue the following command:
 
 ```
 python gamechanger.py
 ```
 
-+ Follow the prompts in your terminal to explore tournament action!
+###Follow the prompts in your terminal to explore tournament action!
 
-+ To terminate the program, press CTRL-C on your keyboard
+###To terminate the program, press CTRL-C on your keyboard
 
-+ If you want to explore an experimental interface in development for text updates, issue the following command:
+###If you want to explore an experimental interface in development for text updates, issue the following command:
  
 ```
 python gamechangerCurses.py
 ```
-
-
-
