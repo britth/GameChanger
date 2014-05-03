@@ -2,28 +2,39 @@ import time
 import datetime
 import curses
 
-
-###Use to format timestamps to unix format
 def unix_time(timestamp):
+  '''
+  Use to format timestamps to unix format
+  '''
   timeFormat = '%m/%d/%Y %H:%M:%S'
   timestamp = timestamp.replace('"', '')
   unixTime = time.mktime(datetime.datetime.strptime(timestamp, timeFormat).timetuple())
   return unixTime
 
-###Converts unix timestamp back to readable date/time
-###In format M/D/Y h/m/s
+
 def est_time(timestamp):
+  '''
+  Converts unix timestamp back to readable date/time
+  In format M/D/Y h/m/s
+  '''
   return datetime.datetime.fromtimestamp(timestamp).strftime('%m/%d/%Y %H:%M:%S')
 
-###Use to check if any matchups have changed (in case schedule should be re-printed
+
 def get_sched(searchingFor, timestamp, matchups, schedule, tv):
+  '''
+  Use to check if any matchups have changed (in case schedule should be re-printed
+  '''
   output = ''
   for key in searchingFor:
     output = output + '\n'+matchups[key] + '\t==\tNetwork: '+ tv[key] + '\t==\tScheduled Start: ' + schedule[key]
   return output.strip()
 
+
 def actionPrint(matchups, tv, greatest, greatestKey, timestamp, avgRate):
-  win = curses.newwin(8,0,10,0) #was 0,0
+  '''
+  Use to print updates in curses interface
+  '''
+  win = curses.newwin(8,0,8,0) #was 0,0
   win.clear()
   win.border(0)
   win.addstr(1,1,'Activity for time period: ' + str (est_time(timestamp-30)) + ' to ' + str(est_time(timestamp-1))) 
@@ -36,7 +47,11 @@ def actionPrint(matchups, tv, greatest, greatestKey, timestamp, avgRate):
   win.addstr(6,1,"Watch it live on "+ tv[greatestKey]+"!")
   win.refresh()
 
+  
 def printingSched(timestamp, matchups, tv, schedule, searchingFor):
+  '''
+  Used to print schedule in curses interface
+  '''
   anotherwin = curses.newwin(0,0)
   anotherwin.clear()
   anotherwin.addstr(0,1,'CURRENT GAMES (as of ' + str(est_time(timestamp))+ ')')
@@ -47,42 +62,11 @@ def printingSched(timestamp, matchups, tv, schedule, searchingFor):
     line = line+1
   anotherwin.refresh()
 
-
-###Main menu function, asking for user input on sport/tournament to follow
-###Moved from test.py
-def main_menu():
-    print "Welcome to GameChanger"
-    file = 'data/NCAA23Mar2014Tweets.txt'
-    sport = ''
-    tournament = ''
-    mode = ''
-    while sport not in ('A', 'a'):
-        user = raw_input("What sports would you want to follow? Type A for Men's basketball: " )
-        print user
-        if user in ('A', 'a'):
-           sport = user
-           print ( user+', ' +"You are a basketball fan. Great!")
-        else:
-           print "Whoops! What you just entered is an invalid input. Could you reenter the right input: A?"
-    while tournament not in ('A', 'a'):
-        user = raw_input ("What tournament do you want to follow? Type A for 2014 NCAA Men's Tournament: " )
-        if user in ('A', 'a'):
-           tournament = user
-           print (user+', ' "You are about to explore which games are more exciting!")
-        else:
-           print "Whoops! What you just entered is an invalid input. Could you reenter a right input: A?"
-    while mode not in ('A', 'a', 'B', 'b'):
-        user = raw_input("What do you want to do? Type A to view updates in real time. Type B to view a graph of tweet volume for a particular game: ")
-        if user in ('A', 'a'):
-            if tournament in ('A', 'a'):
-                return file
-        elif user in ('B', 'b'):
-            graph_avg()
-        else:
-           print "Whoops! What you just entered is an invalid input."        
-
+      
 def GameChanger(tournamentTweets):
-
+  '''
+  Main function used to run gamechanger program
+  '''
   ###Data gathered using Twitter Streaming API
   ###Goal is eventually to stream the tweets directly in real time instead of reading in file
   tweets = open(tournamentTweets)
@@ -156,20 +140,20 @@ def GameChanger(tournamentTweets):
   screen.keypad(1)
 
   ###check time to ensure matchup is occurring (loop every 30 secs)
-  while timestamp < unix_time(tweets[len(tweets)-1][:tweets[len(tweets)-1].find(',')])-14400:	#i.e., reached end of file #was +30
+  while timestamp < unix_time(tweets[len(tweets)-1][:tweets[len(tweets)-1].find(',')])-14400:	#i.e., reached end of file
     searchingFor = search_terms(searchingFor, timestamp, searchTerms, schedule, end)
-    #current_sched = print_sched(searchingFor, timestamp, matchups, schedule, tv, current_sched)
     new_sched = get_sched(searchingFor, timestamp, matchups, schedule, tv)
     if new_sched != current_sched:
       current_sched = new_sched
       printingSched(timestamp, matchups, tv, schedule, searchingFor)
     tweetsPerInterval, tweetRates, tweets = find_current_totals(tweets, tweetRates, searchingFor, timestamp)
+    
+    ###Use to calculate moving average for comparison of rate over time
     totalInterval = 0
     for value in tweetsPerInterval.values():
       totalInterval = totalInterval + value
     avgRate = float(((numIntervals*avgRate)+totalInterval)/(numIntervals+1)) #Cumulative moving average, formula from http://en.wikipedia.org/wiki/Moving_average
     numIntervals = numIntervals + 1
-    ###ABOVE ARE FOR AVERAGE
     
     time.sleep(30)
     timestamp = timestamp + 30
@@ -178,22 +162,17 @@ def GameChanger(tournamentTweets):
       if value > greatest:
         greatest = value
     if greatest > 0:
-      #print '\nActivity for time period: ' + str (est_time(timestamp-30)) + ' to ' + str(est_time(timestamp-1)) + '\n-----------------------------------------------------------'
       greatestKey = tweetsPerInterval.keys()[tweetsPerInterval.values().index(greatest)]
       actionPrint(matchups, tv, greatest, greatestKey, timestamp, avgRate)
-      ##if greatest > avgRate * 2.5 and greatest > 50:
-        ##print "GAME CHANGER! The tweet rate seems to be significantly above average"
-      #print "The most tweeted about game is: " + matchups[greatestKey] +" (" +str(greatest) + " tweets)\nWatch it live on "+ tv[greatestKey]+"!\n-----------------------------------------------------------"
+      
     
     tweetsPerInterval.clear()
-    #print str(avgRate) + " THIS IS AVG RATE" ####ADDED
-  #print tweetRates
-  #screen.refresh()
-  #screen.getch()
-  #curses.endwin()
 
-#find current search terms
+
 def search_terms(searchingFor, timestamp, searchTerms, schedule, end):
+  '''
+  Used to find current search terms
+  '''
   searchingFor = searchingFor
   for key, value in schedule.iteritems():
     if unix_time(value) <= timestamp:
@@ -206,19 +185,12 @@ def search_terms(searchingFor, timestamp, searchTerms, schedule, end):
   return searchingFor
 
 
-#print schedule if there has been a change in lineup (i.e. a new game has started or a game has ended)
-##def print_sched(searchingFor, timestamp, matchups, schedule, tv, current_sched):
-  ##new_sched = get_sched(searchingFor, timestamp, matchups, schedule, tv)
-  ##if new_sched != current_sched:
-    ##current_sched = new_sched
-    ##printingSched(timestamp, matchups, tv, schedule, searchingFor)
-  ##return new_sched
-
-
-#calculate totals based on presence of one of the search strings
-#if any of the matchup strings are found, that key is incremented
-#if a tweet mentions more than one matchup, both keys are incremented
 def find_current_totals(tweets, tweetRates, searchingFor, timestamp):
+  '''
+  calculate totals based on presence of one of the search strings
+  if any of the matchup strings are found, that key is incremented
+  if a tweet mentions more than one matchup, both keys are incremented
+  '''
   tweetsPerInterval = {}
   tweetRates = tweetRates
   for tweet in tweets: 
@@ -228,17 +200,15 @@ def find_current_totals(tweets, tweetRates, searchingFor, timestamp):
       for key, values in searchingFor.items():
         for value in values: 
           if value.lower() in tweet[tweet.find(',')+1:]:
-            tweetRates[key] = tweetRates.get(key, 0)+1 #MIGHT EDIT OUT
+            tweetRates[key] = tweetRates.get(key, 0)+1
             tweetsPerInterval[key] = tweetsPerInterval.get(key, 0)+1
             break
-      tweets.remove(tweet) #NOT SURE? trying to make more efficient?
+      tweets.remove(tweet)
     else:
       break
   return (tweetsPerInterval, tweetRates, tweets)
 
-
-
 #Input is a data set of tweets containing 'marchmadness' or 'ncaa' from evening of March 23
 #timestamps are in GMT
 GameChanger('data/NCAA23Mar2014Tweets.txt')
-#GameChanger(main_menu())
+
