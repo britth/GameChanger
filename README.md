@@ -11,10 +11,10 @@ While still in beta form, a GameChanger demo is live, allowing you to explore te
 
 + Ensure that the following are installed on your system:
 
-⋅⋅* [Canopy](https://www.enthought.com/downloads/)
+  * [Canopy](https://www.enthought.com/downloads/)
 
 
-⋅⋅* [Git Bash](http://git-scm.com/downloads)
+  * [Git Bash](http://git-scm.com/downloads)
 
 
 + Clone the repository: `git clone https://github.com/britth/GameChanger.git`
